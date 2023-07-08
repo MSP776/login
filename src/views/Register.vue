@@ -13,13 +13,12 @@
 						<input type="password" id="password" v-model="registerForm.password" />
 					</div>
 					<div class="login-button">
-						<button type="submit" @click="Register">注册</button>
-						<van-button type="primary" v-if="isshow" to="login" size='mini'>去登陆</van-button>
+						<button type="submit" >注册</button>
 					</div>
 				</form>
-				<!-- <button v-if="isshow" @click="toLogin" class="toLogin">去登陆</button> -->
+			
 			</div>
-			<!-- <button @click="hei">2</button> -->
+
 		</div>
 	</div>
 
@@ -36,7 +35,6 @@
 					password: '',
 				},
 				code: "",
-				isshow: false
 
 			}
 		},
@@ -50,13 +48,10 @@
 						console.log(this.code);
 						if (this.code == 200) {
 							this.$toast('注册成功');
-							console.log(this.isshow);
-							this.isshow = true
-							console.log(this.isshow);
+							this.$router.push({
+								path: '/login'
+							})
 						}
-						// if(this.$data.code == 200){
-						// 	Toast.success('注册成功');
-						// }
 						if (this.$data.code == 400) {
 							this.$toast('用户名或密码不能为空');
 						}

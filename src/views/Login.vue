@@ -17,7 +17,7 @@
 						<!-- <router-link to="/register">注册</router-link> -->
 						<van-button type="primary" to="register" size='mini'>注册</van-button>
 
-						
+
 					</div>
 				</form>
 
@@ -26,12 +26,17 @@
 
 		</div>
 	</div>
+
 </template>
 
 <script>
 	import axios from 'axios';
-	
+	import {
+		useRouter
+	} from 'vue-router'
+
 	export default {
+
 		data() {
 			return {
 				loginForm: {
@@ -39,15 +44,20 @@
 					password: '',
 				},
 				message: '',
+				userid: '',
+				pageWidth: window.innerWidth,
+				limitPageWidth: window.innerWidth
 			};
 		},
 
 		methods: {
+
 			login() {
 				axios
 					.post('https://8.130.111.133:3000/login', this.loginForm)
 					.then((response) => {
 						this.message = response.data.message;
+						this.userid = response.data.user.username
 						console.log(response.data);
 						if (response.data.code == 400) {
 							this.$toast(this.message);
@@ -60,7 +70,11 @@
 						}
 						if (response.data.code == 200) {
 							this.$toast(this.message);
-							this.$router.push({path:'/detail'})
+							console.log(this.userid)
+							this.$router.push({
+								name: 'detail',
+								 query: { userId: this.userid }
+							})
 						}
 
 					})
@@ -72,13 +86,9 @@
 			},
 
 		},
-		// mounted() {
-		// 	document.querySelector('body').setAttribute('style', 'background-color:#00aaff')
-		// },
-		// beforeDestroy() {
-		// 	document.querySelector('body').removeAttribute('style') 
-		// },
-	};
+
+
+	}
 </script>
 
 <style>

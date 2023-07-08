@@ -4,7 +4,7 @@ import axios from 'axios'
 // 把 axios 挂载到 Vue 原型上. 今后,在每个 .vue 组件中发起请求,直接调用 this.$http 即可.
 // Vue.prototype.axios = axios 
 const http = axios.create({
-    baseURL: 'https://8.130.111.133:3000/', //域名
+    baseURL: 'https://api.vvhan.com/api', //域名
     timeout: 5000, //响应时间
     // headers:{"Content-Type":"application/json;charset=utf-8"},
 })
